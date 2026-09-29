@@ -26,7 +26,6 @@ public class ApiResponse<T> {
     public static <T> ApiResponse<T> success(T data) {
         return ApiResponse.<T>builder()
                 .success(true)
-
                 .data(data)
                 .timestamp(LocalDateTime.now())
                 .build();
@@ -68,6 +67,10 @@ public class ApiResponse<T> {
                 .build();
     }
 
+    /**
+     * Réponse succès avec données supplémentaires
+     * pour retourner les détails des succès de validation
+     */
     public static <T> ApiResponse<T> success(String message, T data) {
         return ApiResponse.<T>builder()
                 .success(true)

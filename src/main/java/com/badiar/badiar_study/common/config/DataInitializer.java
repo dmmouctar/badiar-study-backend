@@ -27,16 +27,16 @@ public class DataInitializer implements CommandLineRunner {
     private final GenderRepository          genderRepository;
     private final ExaminationTypeRepository examinationTypeRepository;
 
-    @Value("${app.super-admin.email:superadmin@badiar.com}")
+    @Value("${app.super-admin.email}")
     private String superAdminEmail;
 
-    @Value("${app.super-admin.password:BadiarAdmin@2025!}")
+    @Value("${app.super-admin.password}")
     private String superAdminPassword;
 
-    @Value("${app.super-admin.first-name:Super}")
+    @Value("${app.super-admin.first-name}")
     private String superAdminFirstName;
 
-    @Value("${app.super-admin.last-name:Admin}")
+    @Value("${app.super-admin.last-name}")
     private String superAdminLastName;
 
     @Override
@@ -59,43 +59,37 @@ public class DataInitializer implements CommandLineRunner {
                     .build());
 
             log.info("======================================================");
-            log.info("   Compte SUPER_ADMIN créé avec succès");
+            log.info("   Compte SUPER_ADMIN cree avec succes");
             log.info("   Email    : {}", superAdminEmail);
             log.info("-------------------------------------------------------");
         } else {
-            log.info("SUPER_ADMIN déjà existant — initialisation ignorée");
+            log.info("SUPER_ADMIN deja existant — initialisation ignoree");
         }
     }
 
-    /**
-     * Idempotent — n'insère rien si les genres existent déjà en base.
-     */
     private void initializeGenders() {
         if (genderRepository.count() == 0) {
             genderRepository.saveAll(List.of(
                     Gender.builder().name("Masculin").build(),
-                    Gender.builder().name("Féminin").build()
+                    Gender.builder().name("Feminin").build()
             ));
-            log.info("Genres initialisés.");
+            log.info("Genres initialises.");
         } else {
-            log.debug("Genres déjà présents — initialisation ignorée.");
+            log.debug("Genres deja presents — initialisation ignoree.");
         }
     }
 
-    /**
-     * Idempotent — n'insère rien si des types d'examens existent déjà.
-     */
     private void initializeExaminationTypes() {
         if (examinationTypeRepository.count() == 0) {
             examinationTypeRepository.saveAll(List.of(
-                    ExaminationType.builder().name("Contrôle Continu").build(),
+                    ExaminationType.builder().name("Controle Continu").build(),
                     ExaminationType.builder().name("Examen Final").build(),
                     ExaminationType.builder().name("Devoir Mensuel").build(),
                     ExaminationType.builder().name("Rattrapage").build()
             ));
-            log.info("Types d'examens initialisés.");
+            log.info("Types d'examens initialises.");
         } else {
-            log.debug("Types d'examens déjà présents — initialisation ignorée.");
+            log.debug("Types d'examens deja presents — initialisation ignoree.");
         }
     }
 }
