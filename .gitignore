@@ -55,4 +55,4 @@ application-dev.properties
 application-prod.properties
 *.env
 .env
-"application-local.properties" 
+application-local.properties
